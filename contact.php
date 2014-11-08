@@ -1,38 +1,6 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Free Global Ideas Website Template | Contact :: w3layouts</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-</head>
+<?php include 'topo.php'; ?>
 <body>
-  <div class="header">
-  	 <div class="header_top">
-	        <div class="wrap">		
-		 		<div class="logo">
-						<a href="index.html"><img src="images/logo.png" alt="" /></a>
-					</div>	
-					 <div class="menu">
-					    <ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="services.html">Services</a></li>
-							<li><a href="404.html">Clients</a></li>
-							<li class="active"><a href="contact.html">Contact</a></li>
-							<div class="clear"></div>
-						</ul>
-					 </div>						
-	    		 <div class="clear"></div>
-	        </div>
-	    </div>
-  	</div>		
+	<?php include 'menu.php'; ?>	
       <div class="main">
       	 <div class="contact">
 			<div class="wrap">
@@ -49,23 +17,57 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="col span_2_of_3">
 				  <div class="contact-form">
 				  	<h3>Contact Us</h3>
-					    <form method="post" action="contact-post.html">
+				  	
+				  	
+				  	
+					    <form method="post" action="actions/contact.php?local=manaus">
 					    	<div>
 						    	<span><label>NAME</label></span>
-						    	<span><input name="userName" type="text" class="textbox"></span>
+						    	<span><input name="userName" type="text" class="textbox" required="required"></span>
+						    </div>
+						    <div>
+						    	<span><label>ASSUNTO</label></span>
+						    	<span>
+						    		<select name="assunto"  required="required">
+						    		    <option value="">Selecione</option>
+						    			<option value="Dúvida">Dúvida</option>
+						    			<option value="Crítica">Crítica</option>
+						    			<option value="Sugestão">Sugestão</option>
+						    		</select>
+						    	</span>
+						    </div>
+						    <div>
+						    	<span><label>SEXO</label></span>
+						    	<span>
+						    		<input type="radio" name="sexo" value="Masculino" required="required"/> Masculino 
+						    		<input type="radio" name="sexo" value="Feminino"/> Feminino 
+						    	</span>
+						    </div>
+						    <div>
+						    	<span><label>MELHOR HORÁRIO ENTRARMOS EM CONTATO:</label></span>
+						    	<span>
+						    		<input type="checkbox" name="melhorHorario[]" value="Manhã"/> Manhã 
+						    		<input type="checkbox" name="melhorHorario[]" value="Tarde"/> Tarde 
+						    		<input type="checkbox" name="melhorHorario[]" value="Noite"/> Noite 
+						    	</span>
 						    </div>
 						    <div>
 						    	<span><label>E-MAIL</label></span>
-						    	<span><input name="userEmail" type="text" class="textbox"></span>
-						    </div>						   
+						    	<span><input name="userEmail" type="email" class="textbox" required="required"></span>
+						    </div>		
 						    <div>
 						    	<span><label>SUBJECT</label></span>
-						    	<span><textarea name="userMsg"> </textarea></span>
+						    	<span><textarea name="userMsg" required="required"></textarea></span>
 						    </div>
 						   <div>
-						   		<span><input type="submit" class="mybutton" value="Submit"></span>
+						   		<span>
+						   			<input type="submit" class="mybutton" value="Submit">
+						   			<input type="hidden" name="campoOcultoDoMal" value="Alguma coisa que eu não quero que o usuário veja nem modifique."/>
+						   		</span>
 						  </div>
 					    </form>
+					    
+					    
 
 				    </div>
   				</div>				
