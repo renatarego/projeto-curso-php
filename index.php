@@ -9,7 +9,7 @@
 						<div class="grid_icon">
 							<a href="about.html"><img src="images/g1.png"></a>
 						</div>
-						<h3>Success stories</h3>
+						<h3>Success stories eder</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
 							do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 							Duis aute irure dolor in reprehenderit in voluptate velit esse

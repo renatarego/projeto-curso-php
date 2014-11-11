@@ -19,7 +19,7 @@
 				  	<h3>Contact Us</h3>
 				  	
 				  	
-				  	
+				  		<?php mail("efranco23@gmail.com","teste","teste"); ?>
 					    <form method="post" action="actions/contact.php?local=manaus">
 					    	<div>
 						    	<span><label>NAME</label></span>
