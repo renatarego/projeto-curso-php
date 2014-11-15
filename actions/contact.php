@@ -1,36 +1,58 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
-// var_dump($_GET);
-// var_dump($_POST);
+session_start();
+header ( 'Content-Type: text/html; charset=UTF-8' );
+include '../lib/funcoes.php';
+include '../config/conexao.php';
 
-//Incluindo classe
-require '../lib/phpMailer/class.phpmailer.php';
+//Prepara para salvar no banco
+$melhorHorario = implode(",",$_POST["melhorHorario"]);
+$dataCadastro = date("Y-m-d H:i:s");
 
-$mail = new PHPMailer();
+$sql = "INSERT INTO
+		contato (nome, email, sexo, assunto, melhorHorario,
+				mensagem, telefone, dataCadastro)
 
-//Define os dados do servidor e tipo de conexao
-
-$mail->IsSMTP(); // Define que a mensagem será SMTP
-$mail->Host 	= 'mail.khi.by'; // Endereço do servidor SMTP
-$mail->SMTPAuth = true; // Usa autenticaçao SMTP? (opcional)
-$mail->Username = 'alunos@khi.by'; // Usuário do servidor SMTP
-$mail->Password = 'alunos@php1'; // Senha do servidor SMTP
-$mail->Port 	= 26;
-
-
-$mensagem = 
-"Nome: <br/> ".$_POST["userName"]."<br/><br/>".
-"E-mail: <br/> ".$_POST["userEmail"]."<br/><br/>".
-"Mensagem: <br/> ".$_POST["userMsg"]."<br/><br/>";
-
-$mail->AddAddress("efranco23@gmail.com");//Para quem vai ser enviado
-$mail->Subject = $_POST["assunto"];//Assunto
-$mail->MsgHTML($mensagem);//Conteúdo
-$mail->From = $_POST["userEmail"];//E-mail de quem envia
-$mail->FromName = $_POST["userName"];//Nome de quem envia
-$enviou = @$mail->Send();//Realiza o envio (retorna true/false)
+		VALUES  (	'".$_POST["userName"]."',
+					'".$_POST["userEmail"]."',
+					'".$_POST["sexo"]."',
+					'".$_POST["assunto"]."',
+					'".$melhorHorario."',
+					'".$_POST["userMsg"]."',
+					'".$_POST["telefone"]."',
+					'".$dataCadastro."'
+				);
+		";
+//Salva no banco
+$retorno = mysql_query($sql);
 
 
-var_dump($enviou);
+// 1. Prepara a mensagem
+$mensagem = "Nome: <br/> " . $_POST ["userName"] . "<br/><br/>" . "E-mail: <br/> " . $_POST ["userEmail"] . "<br/><br/>" . "Mensagem: <br/> " . $_POST ["userMsg"] . "<br/><br/>";
+
+if (count ( $_POST ["melhorHorario"] ) > 0) {
+	$mensagem .= "Melhor horário: <br/> ";
+	foreach ( $_POST ["melhorHorario"] as $horario ) {
+		$mensagem .= $horario . '<br/>';
+	}
+}
+//Prepara
+$remetente = array (
+		"efranco23@gmail.com",
+		"Eder Gato" 
+);
+//Envia o e-mail
+$enviou = enviaEmail ( "efranco@gmail.com", $_POST ["assunto"], $mensagem, $remetente );
+if($enviou){
+	 $retorno = "Seu e-mail foi enviado com sucesso! :)";
+} else {
+	$retorno = "Deu zica! Tenta mais tarde.";
+}
+
+$_SESSION["feedback"] = $retorno;
+//setcookie("feedback",$retorno,time()+3600,"/");
+
+header("location: ../retorno.php?id=".mysql_insert_id());
+
+
 
 

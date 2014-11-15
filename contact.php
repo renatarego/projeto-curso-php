@@ -1,4 +1,7 @@
-<?php include 'topo.php'; ?>
+<?php 
+session_start();
+//setcookie("feedback","Alguma coisa",time()+3600,"/");
+include 'topo.php'; ?>
 <body>
 	<?php include 'menu.php'; ?>	
       <div class="main">
@@ -17,13 +20,17 @@
 				<div class="col span_2_of_3">
 				  <div class="contact-form">
 				  	<h3>Contact Us</h3>
+				  		
+
 				  	
-				  	
-				  		<?php mail("efranco23@gmail.com","teste","teste"); ?>
 					    <form method="post" action="actions/contact.php?local=manaus">
 					    	<div>
 						    	<span><label>NAME</label></span>
 						    	<span><input name="userName" type="text" class="textbox" required="required"></span>
+						    </div>
+						    <div>
+						    	<span><label>TELEFONE</label></span>
+						    	<span><input name="telefone" type="text" class="textbox" required="required"></span>
 						    </div>
 						    <div>
 						    	<span><label>ASSUNTO</label></span>
@@ -39,8 +46,8 @@
 						    <div>
 						    	<span><label>SEXO</label></span>
 						    	<span>
-						    		<input type="radio" name="sexo" value="Masculino" required="required"/> Masculino 
-						    		<input type="radio" name="sexo" value="Feminino"/> Feminino 
+						    		<input type="radio" name="sexo" value="M" required="required"/> Masculino 
+						    		<input type="radio" name="sexo" value="F"/> Feminino 
 						    	</span>
 						    </div>
 						    <div>
@@ -62,7 +69,6 @@
 						   <div>
 						   		<span>
 						   			<input type="submit" class="mybutton" value="Submit">
-						   			<input type="hidden" name="campoOcultoDoMal" value="Alguma coisa que eu não quero que o usuário veja nem modifique."/>
 						   		</span>
 						  </div>
 					    </form>
