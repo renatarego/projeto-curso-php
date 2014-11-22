@@ -1,7 +1,7 @@
 <?php
 require '../lib/phpMailer/class.phpmailer.php';
 
-function enviaEmail($destinatario, $assunto, $mensagem, $remetente) {
+function enviaEmail($destinatario, $assunto, $mensagem, $remetente, $anexos = array()) {
 	$mail = new PHPMailer ();
 	
 	// Define os dados do servidor e tipo de conexao
@@ -31,10 +31,28 @@ function enviaEmail($destinatario, $assunto, $mensagem, $remetente) {
 	$mail->From = $remetente[0]; // E-mail de quem envia
 	$mail->FromName = $remetente[1]; // Nome de quem envia
 	$mail->CharSet = 'UTF-8';
+	
+	//Verifica se tem anexos
+	if(count($anexos) > 0){
+		//Percorrer o array de anexos
+		foreach($anexos as $anexo){
+			//Adiciona cada arquivo como anexo
+			$mail->AddAttachment($anexo);
+		}
+	}
 	$enviou = @$mail->Send(); // Realiza o envio (retorna true/false)
-	
-	//var_dump($assunto);
-	//var_dump($mensagem);
-	
 	return $enviou;
+}
+
+//Verifica se o tipo arquivo é válido
+function isTipoValido($tipos){
+	$tipos_permitidos = array("image","pdf");
+	$tipoValido = false;
+	foreach($tipos_permitidos as $perm){
+		if(in_array($perm,$tipos)){
+			$tipoValido = true;
+			break;
+		}
+	}
+	return 	$tipoValido;
 }

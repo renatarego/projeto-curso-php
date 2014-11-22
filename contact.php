@@ -1,7 +1,9 @@
 <?php 
 session_start();
 //setcookie("feedback","Alguma coisa",time()+3600,"/");
-include 'topo.php'; ?>
+include 'topo.php'; 
+ini_set("upload_max_filesize ","50MB");
+?>
 <body>
 	<?php include 'menu.php'; ?>	
       <div class="main">
@@ -23,7 +25,7 @@ include 'topo.php'; ?>
 				  		
 
 				  	
-					    <form method="post" action="actions/contact.php?local=manaus">
+					    <form method="post" action="actions/contact.php" enctype="multipart/form-data">
 					    	<div>
 						    	<span><label>NAME</label></span>
 						    	<span><input name="userName" type="text" class="textbox" required="required"></span>
@@ -40,6 +42,8 @@ include 'topo.php'; ?>
 						    			<option value="Dúvida">Dúvida</option>
 						    			<option value="Crítica">Crítica</option>
 						    			<option value="Sugestão">Sugestão</option>
+						    			<option value="Quero trabalhar com vocês">Quero trabalhar com vocês</option>
+						    			<option value="Outros">Outros</option>
 						    		</select>
 						    	</span>
 						    </div>
@@ -61,7 +65,15 @@ include 'topo.php'; ?>
 						    <div>
 						    	<span><label>E-MAIL</label></span>
 						    	<span><input name="userEmail" type="email" class="textbox" required="required"></span>
-						    </div>		
+						    </div>	
+						    <div>
+						    	<span><label>Foto de perfil</label></span>
+						    	<span><input name="foto" type="file" class="textbox" required="required"></span>
+						    </div>
+						    <div>
+						    	<span><label>Curriculum</label></span>
+						    	<span><input name="curriculum" type="file" class="textbox" required="required"></span>
+						    </div>			
 						    <div>
 						    	<span><label>SUBJECT</label></span>
 						    	<span><textarea name="userMsg" required="required"></textarea></span>
